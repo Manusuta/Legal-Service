@@ -141,9 +141,9 @@ function SearchLawyer() {
             value={sortBy}
             onChange={handleSortChange}
           >
-            <option value="">Sort By</option>
+            <option value="">Sort By.</option>
             <option value="experience">Experience</option>
-            <option value="rating">Ratings</option>
+            <option value="rating">Rating</option>
          
           </select>
         </div>
