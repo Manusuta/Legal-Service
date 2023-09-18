@@ -69,9 +69,7 @@ function SearchLawyer() {
   });
   const [sortBy, setSortBy] = useState(''); 
 
-  const handleFilterChange = (filter, value) => {
-    setFilters({ ...filters, [filter]: value });
-  };
+  
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
@@ -95,22 +93,20 @@ function SearchLawyer() {
     })
     .sort((a, b) => {
       if (sortBy === 'experience') {
-        // Sort by experience first
+    
         const experienceDiff =
           (b.description?.experience?.year?.$numberInt || 0) -
           (a.description?.experience?.year?.$numberInt || 0);
-  
-        // If experience is the same, sort by rating
+
         if (experienceDiff === 0) {
           return (b.T_rating || 0) - (a.T_rating || 0);
         }
   
         return experienceDiff;
       } else if (sortBy === 'rating') {
-        // Sort by rating first
+      
         const ratingDiff = (b.T_rating || 0) - (a.T_rating || 0);
-  
-        // If rating is the same, sort by experience
+
         if (ratingDiff === 0) {
           return (
             (b.description?.experience?.year?.$numberInt || 0) -
@@ -168,9 +164,9 @@ function SearchLawyer() {
               <p className="text-gray-600">{lawyer.city || 'No City'}</p>
               <p className="text-gray-600">Hourly Rate: ${lawyer.hourlyRate || 'N/A'}</p>
               <p className="text-gray-600">{lawyer.T_rating || 'No title'}</p>
-              <div className="mt-2">
+              {/* <div className="mt-2">
                 Tags: {lawyer.tag ? lawyer.tag.join(', ') : 'No Tags'}
-              </div>
+              </div> */}
             </div>
           </div>
         ))}
