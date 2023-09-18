@@ -143,7 +143,7 @@ function SearchLawyer() {
           >
             <option value="">Sort By.</option>
             <option value="experience">Experience</option>
-            <option value="rating">Rating</option>
+            <option value="rating">Ratings</option>
          
           </select>
         </div>
