@@ -86,50 +86,6 @@ function SearchLawyer() {
   };
   
 
-  // const filteredLawyers = data
-  //   .filter((lawyer) => {
-  //     const queryWords = searchQuery.toLowerCase().split(' ');
-
-  //     return (
-  //       queryWords.every((word) =>
-  //         Object.values(lawyer).some(
-  //           (value) =>
-  //             typeof value === 'string' && value.toLowerCase().includes(word)
-  //         )
-  //       ) &&
-  //       (!filters.experience || lawyer.description?.experience?.year?.$numberInt >= filters.experience) &&
-  //       (!filters.rating || lawyer.T_rating >= filters.rating) &&
-  //       (!filters.reviews || lawyer.review?.length >= filters.reviews)
-  //     );
-  //   })
-  //   .sort((a, b) => {
-  //     if (sortBy === 'experience') {
-    
-  //       const experienceDiff =
-  //         (b.description?.experience?.year?.$numberInt || 0) -
-  //         (a.description?.experience?.year?.$numberInt || 0);
-
-  //       if (experienceDiff === 0) {
-  //         return (b.T_rating || 0) - (a.T_rating || 0);
-  //       }
-  
-  //       return experienceDiff;
-  //     } else if (sortBy === 'rating') {
-      
-  //       const ratingDiff = (b.T_rating || 0) - (a.T_rating || 0);
-
-  //       if (ratingDiff === 0) {
-  //         return (
-  //           (b.description?.experience?.year?.$numberInt || 0) -
-  //           (a.description?.experience?.year?.$numberInt || 0)
-  //         );
-  //       }
-  
-  //       return ratingDiff;
-  //     }
-
-  //     return 0;
-  //   });
   const filteredLawyers = data
   .filter((lawyer) => {
     const queryWords = searchQuery.toLowerCase().split(' ');
@@ -148,29 +104,26 @@ function SearchLawyer() {
     );
   })
   .sort((a, b) => {
-    // Define the sorting criteria based on the selected filter
+   
     if (sortBy === 'experience') {
-      // Sort by experience first
+   
       const experienceDiff =
         (b.description?.experience?.year?.$numberInt || 0) -
         (a.description?.experience?.year?.$numberInt || 0);
-
-      // If experience is the same, sort by rating
       if (experienceDiff === 0) {
         return (b.T_rating || 0) - (a.T_rating || 0);
       }
 
-      // If rating is also the same, sort by price
       if (experienceDiff === 0 && (a.price || 0) && (b.price || 0)) {
         return (a.price || 0) - (b.price || 0);
       }
 
       return experienceDiff;
     } else if (sortBy === 'rating') {
-      // Sort by rating first
+   
       const ratingDiff = (b.T_rating || 0) - (a.T_rating || 0);
 
-      // If rating is the same, sort by experience
+      
       if (ratingDiff === 0) {
         return (
           (b.description?.experience?.year?.$numberInt || 0) -
@@ -178,64 +131,31 @@ function SearchLawyer() {
         );
       }
 
-      // If experience is also the same, sort by price
+    
       if (ratingDiff === 0 && (a.price || 0) && (b.price || 0)) {
         return (a.price || 0) - (b.price || 0);
       }
 
       return ratingDiff;
     } else if (sortBy === 'price') {
-      // Sort by price
+     
       return (a.price || 0) - (b.price || 0);
     }
 
-    // Add more sorting criteria as needed
-
-    // If no sorting is applied, maintain the original order
     return 0;
   });
 
 
   return (
-    // <div className="bg-blue-100 min-h-screen p-8">
-    //   <div className="max-w-4xl mx-auto bg-white p-4 rounded-md shadow-md">
-    //     <h1 className="text-3xl font-semibold mb-4 text-center"></h1>
-    //     <div className="flex space-x-4 justify-center">
-    //       <input
-    //         type="text"
-    //         placeholder="Search here"
-    //         className="p-2 border rounded-md"
-    //         value={searchQuery}
-    //         onChange={(e) => setSearchQuery(e.target.value)}
-    //       />
-    //       <select
-    //         className="p-2 border rounded-md"
-    //         value={sortBy}
-    //         onChange={handleSortChange}
-    //       >
-    //         <option value="">Sort By.</option>
-    //         <option value="experience">Experience</option>
-    //         <option value="rating">Ratings</option>
-    //         <option value="rating">Price</option>
-         
-    //       </select>
-    //     </div>
-    //   </div>
+  
     <div className="bg-blue-100 min-h-screen ">
-    {/* External div for search bar with full width and blue background */}
+    
     <div className="bg-blue-900 p-10 mb-4 h-50 ">
-      {/* <div className="max-w-4xl mx-auto bg-white p-4 rounded-md shadow-md"> */}
-        {/* <h1 className="text-3xl font-semibold mb-4 text-center"></h1> */}
+     
         <div className="flex space-x-4 justify-center  ">
-          {/* Search bar with icon */}
+        
           <div className="relative flex-1 p-8  ">
-            {/* <input
-              type="text"
-              placeholder="Search here"
-              className="p-2 pl-8 border rounded-md w-full"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            /> */}
+           
             
             <input
             
@@ -252,19 +172,6 @@ function SearchLawyer() {
 
             
           </div>
-          {/* Sort by radio buttons */}
-          {/* <select
-            className="p-2 border rounded-md "
-            value={sortBy}
-            onChange={handleSortChange}
-          >
-            <option value="">Sort By.</option>
-            <option value="experience">Experience</option>
-            <option value="rating">Ratings</option>
-            <option value="price">Price</option>
-          </select>
-        </div>
-      </div> */}
       
        
       <div className="mt-20 flex items-center space-x-4 text-white">
@@ -303,7 +210,7 @@ function SearchLawyer() {
         </div>
       </div>
     
-    {/* </div> */}
+
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {filteredLawyers.map((lawyer, index) => (
           <div
